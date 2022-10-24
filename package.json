@@ -1,0 +1,15 @@
+{
+  "name": "ccmd",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx cypress run",
+    "test:open": "npx cypress open"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^10.10.0"
+  }
+}
