@@ -1,7 +1,7 @@
 describe('Store tests', () => {
   it('using parent commands.', () => {
     cy.visit("")
-    cy.login();
+      .login();
     cy.addItemToCart();
     cy.goToCheckout();
 

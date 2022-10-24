@@ -1,13 +1,16 @@
-Cypress.Commands.add('login', () => {
-  cy.get('[data-test="username"]')
-    .type('standard_user');
-  cy.get('[data-test="password"]')
-    .type('secret_sauce');
-  cy.get('[data-test="login-button"]')
-    .click();
+Cypress.Commands.add('login', { prevSubject: true }, (subject) => {
+  cy.wrap(subject).then(() => {
+    cy.get('[data-test="username"]')
+      .type('standard_user');
+    cy.get('[data-test="password"]')
+      .type('secret_sauce');
+    cy.get('[data-test="login-button"]')
+      .click();
 
-  cy.url().should("contain", "inventory");
-  cy.get('#inventory_container');
+    cy.url().should("contain", "inventory");
+    cy.get('#inventory_container');
+  })
+
 });
 
 Cypress.Commands.add('addItemToCart', () => {
