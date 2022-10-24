@@ -1,15 +1,20 @@
-Cypress.Commands.add('login', { prevSubject: true }, (subject) => {
-  cy.wrap(subject).then(() => {
-    cy.get('[data-test="username"]')
-      .type('standard_user');
-    cy.get('[data-test="password"]')
-      .type('secret_sauce');
-    cy.get('[data-test="login-button"]')
-      .click();
+Cypress.Commands.add('login', { prevSubject: 'optional' }, (subject) => {
 
-    cy.url().should("contain", "inventory");
-    cy.get('#inventory_container');
-  })
+
+  if (!subject) {
+    Cy.log("I need to visit website first.")
+    cy.visit("");
+  }
+
+  cy.get('[data-test="username"]')
+    .type('standard_user');
+  cy.get('[data-test="password"]')
+    .type('secret_sauce');
+  cy.get('[data-test="login-button"]')
+    .click();
+
+  cy.url().should("contain", "inventory");
+  cy.get('#inventory_container');
 
 });
 
