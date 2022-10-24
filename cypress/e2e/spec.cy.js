@@ -4,12 +4,14 @@ describe('Store tests', () => {
     cy.addItemToCart();
     cy.goToCheckout();
 
-    cy.setFirstName("FirstName");
-    cy.setLastName("LastName");
-    cy.setPostalCode('123213');
+    cy.getCheckoutForm()
+      .setFirstName("FirstName")
+      .setLastName("LastName")
+      .setPostalCode('123213');
     cy.submitCheckoutForm();
+
     cy.finishCheckout();
 
-    cy.url().should("contain", "checkout-complete")
+    cy.url().should("contain", "checkout-complete");
   })
 })

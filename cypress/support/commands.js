@@ -1,8 +1,7 @@
 Cypress.Commands.add('login', { prevSubject: 'optional' }, (subject) => {
 
-
   if (!subject) {
-    Cy.log("I need to visit website first.")
+    cy.log("I need to visit website first.")
     cy.visit("");
   }
 
@@ -27,25 +26,36 @@ Cypress.Commands.add('goToCheckout', () => {
   cy.get('[data-test="checkout"]').click();
 });
 
-Cypress.Commands.add('setFirstName', (val) => {
-  cy.get('.checkout_info')
-    .find('#first-name')
-    .type(val)
-    .should("have.value", val);
+
+Cypress.Commands.add('getCheckoutForm', () => {
+  return cy.get('.checkout_info')
 });
 
-Cypress.Commands.add('setLastName', (val) => {
-  cy.get('.checkout_info')
-    .find('#last-name')
+Cypress.Commands.add('setFirstName', { prevSubject: 'element' }, (subject, val) => {
+  expect(subject).to.have.class('checkout_info');
+
+  return cy.wrap(subject).find('#first-name')
     .type(val)
     .should("have.value", val)
+    .then(() => subject);
 });
 
-Cypress.Commands.add('setPostalCode', (val) => {
-  cy.get('.checkout_info')
-    .find('#postal-code')
+Cypress.Commands.add('setLastName', { prevSubject: 'element' }, (subject, val) => {
+  expect(subject).to.have.class('checkout_info');
+
+  return cy.wrap(subject).find('#last-name')
     .type(val)
     .should("have.value", val)
+    .then(() => subject);
+});
+
+Cypress.Commands.add('setPostalCode', { prevSubject: 'element' }, (subject, val) => {
+  expect(subject).to.have.class('checkout_info');
+
+  return cy.wrap(subject).find('#postal-code')
+    .type(val)
+    .should("have.value", val)
+    .then(() => subject)
 });
 
 Cypress.Commands.add('submitCheckoutForm', () => {
