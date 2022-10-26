@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "npx cypress run",
-    "test:open": "npx cypress open"
+    "test:open": "npx cypress open",
+    "test:api": "npx cypress run --spec cypress/e2e/api.cy.js"
   },
   "author": "",
   "license": "ISC",
